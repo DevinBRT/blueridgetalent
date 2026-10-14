@@ -3,6 +3,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundVideo from '../components/BackgroundVideo.astro';
 import ContactForm from '../components/ContactForm.astro';
 import LinkedInButton from '../components/LinkedInButton.astro';
+import ExternalIcon from '../components/ExternalIcon.astro';
+import { links } from '../data/site';
 ---
 
 <BaseLayout
@@ -12,14 +14,23 @@ import LinkedInButton from '../components/LinkedInButton.astro';
   <section class="contact bg-section">
     <div class="bg-media">
       <BackgroundVideo name="mountains" />
+      <div class="overlay"></div>
     </div>
 
-    <div class="layout">
+    <div class="container layout">
       <div class="intro">
         <h1 class="heading">Let’s Connect</h1>
+        <p class="lead">
+          Every engagement starts with a conversation. Tell us a little about your team and what you’re working toward.
+        </p>
+        <ul class="details">
+          <li><span>Email</span><a href={`mailto:${links.email}`}>{links.email}</a></li>
+          <li><span>Based in</span>Charlotte, North Carolina</li>
+          <li><span>Looking for a job?</span><a href={links.openRoles} target="_blank" rel="noopener">See our open roles <ExternalIcon /></a></li>
+        </ul>
         <div class="social"><LinkedInButton /></div>
       </div>
-      <div class="form-column">
+      <div class="form-card">
         <ContactForm />
       </div>
     </div>
@@ -28,33 +39,61 @@ import LinkedInButton from '../components/LinkedInButton.astro';
 
 <style>
   .contact {
-    min-height: 969px;
+    min-height: max(100svh, 760px);
+    padding: calc(var(--header-height) + clamp(40px, 6vw, 96px)) 0 clamp(64px, 7vw, 112px);
     background: var(--navy);
     color: var(--cream);
   }
+  .overlay { background: rgb(15 23 48 / 0.35); }
+
   .layout {
     display: grid;
-    /* Form starts at the same spot as on the old site (725px on a 1440px screen) */
-    grid-template-columns: minmax(0, 49.6%) 1fr;
-    padding: 272px 29px 80px 50px;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
   }
   .heading {
-    font-size: var(--size-h2);
-    line-height: 1.11;
-    margin-bottom: 30px;
+    font-size: var(--size-h1);
+    margin-bottom: 0.3em;
   }
-  .social {
-    padding-left: 94px;
+  .lead { max-width: 30ch; margin-bottom: 32px; }
+
+  .details {
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+  .details li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+  .details span {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .details a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    overflow-wrap: anywhere;
   }
 
-  @media (max-width: 767px) {
-    .contact { min-height: 954px; }
-    .layout {
-      grid-template-columns: 1fr;
-      gap: 0;
-      padding: 139px var(--gutter) 80px;
-    }
-    .heading { padding-left: 17px; margin-bottom: 170px; }
-    .social { padding-left: 0; text-align: center; margin-bottom: 30px; }
+  .form-card {
+    padding: clamp(24px, 3vw, 40px);
+    background: rgb(15 23 48 / 0.55);
+    border: 1px solid rgb(255 245 217 / 0.18);
+    border-top: 3px solid var(--gold);
+    border-radius: var(--radius);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 899px) {
+    .layout { grid-template-columns: 1fr; }
   }
 </style>

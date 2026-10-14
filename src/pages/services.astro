@@ -1,157 +1,280 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BackgroundVideo from '../components/BackgroundVideo.astro';
+import Industries from '../components/Industries.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const reasons = [
+  'Fill an important or difficult position',
+  'Add recruiting capacity during a period of growth or change',
+  'Reduce reliance on traditional staffing agencies',
+  'Improve an existing recruiting process or team',
+  'Build an in-house talent acquisition function',
+  'Get more value from their recruiting technology and resources',
+];
 ---
 
 <BaseLayout
   title="Services"
   description="Talent advisory, embedded recruiting, and professional search from Blue Ridge Talent — recruiting support built around your business, plus help building an in-house talent acquisition function."
 >
-  <section class="hero bg-section">
+  <section class="page-hero bg-section">
     <div class="bg-media">
       <img src="/images/services-hero.jpg" alt="" width="1535" height="1024" />
       <div class="overlay"></div>
     </div>
-    <h1>Every Solution Is Built Around Your Needs.</h1>
-  </section>
-
-  <section class="details bg-section">
-    <div class="bg-media">
-      <BackgroundVideo name="sunset-trees" />
-    </div>
-
-    <div class="content prose">
-      <p>Blue Ridge Talent is a recruiting and talent advisory firm based in Charlotte, serving organizations across the Carolinas and beyond.</p>
-      <p>We don’t believe every hiring problem needs the same solution. Sometimes you need help with a critical search. Sometimes your internal recruiting team needs additional capacity. And sometimes the real answer is improving the way your organization recruits altogether.</p>
-      <p>We take the time to understand how your organization hires today, where the challenges are, and what kind of support will actually make a difference. Then we build the right solution around you — not the other way around.</p>
-
-      <h2>Who We Serve</h2>
-      <p>We work with growing businesses, established mid-sized companies, and larger organizations that need flexible, experienced recruiting support.</p>
-      <p>Our clients typically come to us when they need to:</p>
-      <ul>
-        <li>Fill an important or difficult position</li>
-        <li>Add recruiting capacity during a period of growth or change</li>
-        <li>Reduce reliance on traditional staffing agencies</li>
-        <li>Improve an existing recruiting process or team</li>
-        <li>Build an in-house talent acquisition function</li>
-        <li>Get more value from their recruiting technology and resources</li>
-      </ul>
-      <p>We’re industry agnostic, with experience across financial services, banking, insurance, automotive, manufacturing, engineering, healthcare, consulting, and professional services.</p>
-      <p>Every industry is different, but good recruiting starts the same way: understand the business, understand the people, and solve the right problem.</p>
-
-      <h2>How We Help</h2>
-      <p>Our work generally falls into three areas: <strong>Talent Advisory, Embedded Recruiting, and Professional Search.</strong></p>
-      <p>We can advise your team, work alongside it, or take ownership of a search directly.</p>
-      <p>Some engagements are short and focused. Others involve helping an organization rethink how it recruits from the ground up. The goal is always the same: build an approach that works for your business and makes sense long after our engagement ends.</p>
-
-      <h2>Talent Advisory</h2>
-      <p>Sometimes the issue isn’t finding more candidates. It’s figuring out why hiring has become harder, slower, or more expensive than it should be.</p>
-      <p>Every advisory engagement starts with a complimentary consultation to understand your business, hiring goals, current process, and where you’re running into problems.</p>
-      <p>From there, we can take a broader look at your recruiting ecosystem and help identify what’s working, what isn’t, and where there’s an opportunity to improve.</p>
-      <p>That may include:</p>
-      <ul>
-        <li>Recruiting strategy and process</li>
-        <li>Agency usage and recruiting spend</li>
-        <li>Recruiting technology and tools</li>
-        <li>Team structure and recruiter productivity</li>
-        <li>Candidate and hiring manager experience</li>
-        <li>Talent attraction and employer brand</li>
-        <li>Building an internal talent acquisition function</li>
-      </ul>
-      <p>The goal isn’t to sell you more recruiting services. It’s to help you build a better recruiting operation.</p>
-
-      <h2>Embedded Recruiting</h2>
-      <p>Sometimes you have the right recruiting model already. You just need more horsepower.</p>
-      <p>Embedded Recruiting gives you experienced recruiting capacity without making a permanent hire or handing the work off to a traditional staffing agency.</p>
-      <p>We can step in when:</p>
-      <ul>
-        <li>Hiring volume increases unexpectedly</li>
-        <li>Your recruiting team is stretched thin</li>
-        <li>A recruiter leaves or goes on extended leave</li>
-        <li>A difficult group of positions needs additional attention</li>
-        <li>Your organization is going through a period of growth or change</li>
-      </ul>
-      <p>We work as an extension of your team, adapt to your processes and culture, and provide support for as long as it’s needed.</p>
-      <p>When the need goes away, we do too.</p>
-
-      <h2>Professional Search</h2>
-      <p>Not every organization needs a recruiting strategy overhaul or an embedded recruiter.</p>
-      <p>Sometimes you just need to make a great hire.</p>
-      <p>Our Professional Search service is built for organizations that hire selectively and want a recruiting partner they can trust when an important position opens.</p>
-      <p>We take the time to understand the role, the business, the team, and what will make someone successful before we begin the search.</p>
-      <p>Then we represent your organization in the market, engage the right candidates, and manage the process through hire.</p>
-
-      <h3>Building an In-House Talent Acquisition Function</h3>
-      <p>As companies grow, there often comes a point where relying on hiring managers and outside agencies is no longer the best long-term solution.</p>
-      <p>An internal recruiter can give your organization greater control over hiring, reduce outside recruiting costs, improve the candidate experience, and build talent pipelines that continue paying dividends over time.</p>
-      <p>Blue Ridge Talent can help you build that capability from the ground up.</p>
-      <p>We can help assess when an internal hire makes sense, define the role, select the right recruiter, establish processes and technology, onboard the new team member, and provide ongoing coaching as the function develops.</p>
-      <p>The end goal is simple: build a recruiting capability that belongs to your organization — not one that keeps you dependent on ours.</p>
-
-      <h2>A Different Kind of Recruiting Partner</h2>
-      <p>After nearly two decades in recruiting, we’ve seen what happens when the solution is designed around the recruiting firm instead of the client.</p>
-      <p>Blue Ridge Talent was built to do things differently.</p>
-      <p>We’ll recommend the approach we believe makes the most sense for your organization — whether that means working with us, improving what you already have, or helping you build the capability internally.</p>
-      <p>Because the goal isn’t to keep you dependent on a recruiting firm.</p>
-      <p><strong>The goal is to help you hire better.</strong></p>
+    <div class="container">
+      <span class="eyebrow">Services</span>
+      <h1>Every solution is built around your needs.</h1>
+      <p class="lead">Recruiting and talent advisory for organizations across the Carolinas and beyond.</p>
     </div>
   </section>
+
+  <!-- Overview -->
+  <section class="section section--cream">
+    <div class="container split split--top">
+      <div class="prose">
+        <span class="eyebrow">Our philosophy</span>
+        <h2>No two hiring problems are the same</h2>
+        <p class="lead">
+          Sometimes you need help with a critical search. Sometimes your internal recruiting team needs additional
+          capacity. And sometimes the real answer is improving the way your organization recruits altogether.
+        </p>
+        <p>
+          We take the time to understand how your organization hires today, where the challenges are, and what kind of
+          support will actually make a difference. Then we build the right solution around you — not the other way around.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Clients typically come to us when they need to:</h3>
+        <ul class="checklist">
+          {reasons.map((r) => <li>{r}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three areas at a glance -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How we help</span>
+        <h2>Three ways to work together</h2>
+        <p>
+          Our work generally falls into three areas: <strong>Talent Advisory, Embedded Recruiting, and Professional
+          Search.</strong> Some engagements are short and focused. Others involve rethinking how an organization recruits
+          from the ground up. The goal is always the same: an approach that works for your business long after our
+          engagement ends.
+        </p>
+      </div>
+      <div class="card-grid">
+        <a class="card" href="#talent-advisory">
+          <span class="card-number">01</span>
+          <h3>Talent Advisory</h3>
+          <p>We advise your team.</p>
+          <span class="card-link">Details</span>
+        </a>
+        <a class="card" href="#embedded-recruiting">
+          <span class="card-number">02</span>
+          <h3>Embedded Recruiting</h3>
+          <p>We work alongside your team.</p>
+          <span class="card-link">Details</span>
+        </a>
+        <a class="card" href="#professional-search">
+          <span class="card-number">03</span>
+          <h3>Professional Search</h3>
+          <p>We take ownership of the search.</p>
+          <span class="card-link">Details</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 Talent Advisory -->
+  <section class="section section--cream service" id="talent-advisory">
+    <div class="container split split--top">
+      <div class="prose">
+        <span class="eyebrow">01 · Talent Advisory</span>
+        <h2>Build a better recruiting operation</h2>
+        <p class="lead">
+          Sometimes the issue isn’t finding more candidates. It’s figuring out why hiring has become harder, slower, or
+          more expensive than it should be.
+        </p>
+        <p>
+          Every advisory engagement starts with a <strong>complimentary consultation</strong> to understand your
+          business, hiring goals, current process, and where you’re running into problems. From there, we can take a
+          broader look at your recruiting ecosystem and help identify what’s working, what isn’t, and where there’s an
+          opportunity to improve.
+        </p>
+        <p>The goal isn’t to sell you more recruiting services. It’s to help you build a better recruiting operation.</p>
+      </div>
+      <div class="card">
+        <h3>That may include</h3>
+        <ul class="checklist">
+          <li>Recruiting strategy and process</li>
+          <li>Agency usage and recruiting spend</li>
+          <li>Recruiting technology and tools</li>
+          <li>Team structure and recruiter productivity</li>
+          <li>Candidate and hiring manager experience</li>
+          <li>Talent attraction and employer brand</li>
+          <li>Building an internal talent acquisition function</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 Embedded Recruiting -->
+  <section class="section section--light service" id="embedded-recruiting">
+    <div class="container split split--top reverse">
+      <div class="prose">
+        <span class="eyebrow">02 · Embedded Recruiting</span>
+        <h2>More horsepower, no permanent hire</h2>
+        <p class="lead">Sometimes you have the right recruiting model already. You just need more horsepower.</p>
+        <p>
+          Embedded Recruiting gives you experienced recruiting capacity without making a permanent hire or handing the
+          work off to a traditional staffing agency.
+        </p>
+        <p>
+          We work as an extension of your team, adapt to your processes and culture, and provide support for as long as
+          it’s needed. <strong>When the need goes away, we do too.</strong>
+        </p>
+      </div>
+      <div class="card">
+        <h3>We can step in when</h3>
+        <ul class="checklist">
+          <li>Hiring volume increases unexpectedly</li>
+          <li>Your recruiting team is stretched thin</li>
+          <li>A recruiter leaves or goes on extended leave</li>
+          <li>A difficult group of positions needs additional attention</li>
+          <li>Your organization is going through a period of growth or change</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Professional Search -->
+  <section class="section section--cream service" id="professional-search">
+    <div class="container split split--top">
+      <div class="prose">
+        <span class="eyebrow">03 · Professional Search</span>
+        <h2>Sometimes you just need to make a great hire</h2>
+        <p class="lead">Not every organization needs a recruiting strategy overhaul or an embedded recruiter.</p>
+        <p>
+          Our Professional Search service is built for organizations that hire selectively and want a recruiting partner
+          they can trust when an important position opens.
+        </p>
+      </div>
+      <div class="card">
+        <h3>How a search works</h3>
+        <ol class="process">
+          <li><strong>Understand.</strong> The role, the business, the team, and what will make someone successful, before we begin.</li>
+          <li><strong>Represent.</strong> We take your organization to the market and engage the right candidates.</li>
+          <li><strong>Manage.</strong> We run the process with you, all the way through hire.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 In-house TA -->
+  <section class="section section--navy service" id="in-house">
+    <div class="container split split--top">
+      <div class="prose">
+        <span class="eyebrow">04 · In-House Talent Acquisition</span>
+        <h2>Build a function that belongs to you</h2>
+        <p class="lead">
+          As companies grow, there often comes a point where relying on hiring managers and outside agencies is no longer
+          the best long-term solution.
+        </p>
+        <p>
+          An internal recruiter can give your organization greater control over hiring, reduce outside recruiting costs,
+          improve the candidate experience, and build talent pipelines that continue paying dividends over time. Blue
+          Ridge Talent can help you build that capability from the ground up.
+        </p>
+        <p>
+          <strong>The end goal is simple:</strong> build a recruiting capability that belongs to your organization — not
+          one that keeps you dependent on ours.
+        </p>
+      </div>
+      <div class="card">
+        <h3>We can help</h3>
+        <ul class="checklist">
+          <li>Assess when an internal hire makes sense</li>
+          <li>Define the role</li>
+          <li>Select the right recruiter</li>
+          <li>Establish processes and technology</li>
+          <li>Onboard the new team member</li>
+          <li>Provide ongoing coaching as the function develops</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="section section--light" id="industries">
+    <div class="container">
+      <Industries />
+    </div>
+  </section>
+
+  <!-- Different kind of partner -->
+  <section class="section section--cream">
+    <div class="container partner">
+      <span class="eyebrow">Why Blue Ridge Talent</span>
+      <h2>A different kind of recruiting partner</h2>
+      <p class="lead">
+        After nearly two decades in recruiting, we’ve seen what happens when the solution is designed around the
+        recruiting firm instead of the client. Blue Ridge Talent was built to do things differently.
+      </p>
+      <p>
+        We’ll recommend the approach we believe makes the most sense for your organization — whether that means working
+        with us, improving what you already have, or helping you build the capability internally. Because the goal isn’t
+        to keep you dependent on a recruiting firm.
+      </p>
+      <p class="kicker">The goal is to help you hire better.</p>
+    </div>
+  </section>
+
+  <CtaBand />
 </BaseLayout>
 
 <style>
-  .hero {
-    min-height: 658px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--header-height) var(--gutter) 60px;
-    background: var(--navy);
-    color: var(--cream);
-    text-align: center;
-  }
-  .hero .overlay {
-    background: var(--navy);
-    opacity: 0.15;
-  }
-  .hero h1 { margin: 0; }
+  .service .card { align-self: start; }
 
-  .details {
-    background: var(--navy);
-    color: var(--cream);
-    text-align: center;
-  }
-  .content {
-    padding: 100px var(--gutter) 110px;
-  }
-  .content h2,
-  .content h3 {
-    margin-top: 0.9em;
-    margin-bottom: 0.45em;
+  /* Alternate which side the card sits on */
+  @media (min-width: 900px) {
+    .reverse > :first-child { order: 2; }
   }
 
-  .content ul {
-    list-style: none;
-    margin: 0 0 0.75em;
+  .process {
+    margin: 0;
     padding: 0;
+    list-style: none;
+    counter-reset: step;
   }
-  .content li {
-    margin-bottom: 0.5em;
+  .process li {
+    position: relative;
+    padding-left: 48px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    counter-increment: step;
   }
-  /* Small centered dot before each item, as on the original site */
-  .content li::before {
-    content: '•';
-    display: inline-block;
-    margin-right: 0.5em;
-    font-size: 0.6em;
-    vertical-align: middle;
+  .process li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--gold);
   }
 
-  @media (max-width: 767px) {
-    .hero {
-      min-height: 0;
-      padding-top: 92px;
-      padding-bottom: 40px;
-    }
-    .content { padding-top: 60px; }
+  .partner {
+    max-width: 860px;
+    text-align: center;
+  }
+  .kicker {
+    margin-top: 28px;
+    font-family: var(--font-heading);
+    font-size: var(--size-h3);
+    text-transform: uppercase;
   }
 </style>

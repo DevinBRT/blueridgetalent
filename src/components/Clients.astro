@@ -1,0 +1,70 @@
+---
+/**
+ * Companies Devin has partnered with.
+ * The names are shown as type for now. To use real logos, put each file in
+ * public/images/clients/ (SVG or PNG, ideally single-color) and set `logo`
+ * to its path, e.g. logo: '/images/clients/scor.svg'.
+ */
+const clients: { name: string; logo?: string }[] = [
+  { name: 'SCOR' },
+  { name: 'Wells Fargo' },
+  { name: 'Husqvarna' },
+  { name: 'Aeroflow' },
+  { name: 'Eurowise' },
+  { name: 'Optimum Manufacturing' },
+];
+---
+
+<div class="clients">
+  <div class="section-head section-head--center">
+    <span class="eyebrow">Clients</span>
+    <h2>Trusted by teams like these</h2>
+    <p>From global insurers to growing manufacturers, organizations rely on Blue Ridge Talent to find the people who move them forward.</p>
+  </div>
+  <ul class="logo-wall">
+    {clients.map((c) => (
+      <li>
+        {c.logo ? <img src={c.logo} alt={c.name} loading="lazy" /> : <span>{c.name}</span>}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .logo-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .logo-wall li {
+    display: grid;
+    place-items: center;
+    min-height: 120px;
+    padding: 24px;
+    background: var(--cream-light);
+    text-align: center;
+  }
+  .logo-wall span {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.75;
+  }
+  .logo-wall img {
+    max-width: 140px;
+    max-height: 48px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.8;
+  }
+</style>

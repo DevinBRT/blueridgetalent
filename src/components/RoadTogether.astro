@@ -1,0 +1,101 @@
+---
+/**
+ * "The Road Together": Devin's approach, told around the winding mountain road photo.
+ * Used on the Home and About pages.
+ */
+const steps = [
+  { title: 'Understand the business', text: 'Goals, growth plans and what the role really needs to accomplish.' },
+  { title: 'Learn the culture', text: 'How your teams work, communicate and make decisions.' },
+  { title: 'Evaluate the whole person', text: 'Skills and experience, plus the emotional intelligence that makes people thrive.' },
+  { title: 'Travel as one team', text: 'An extension of your company, not a third-party vendor.' },
+];
+---
+
+<div class="road split">
+  <figure class="photo">
+    <img src="/images/road.jpg" alt="A winding road through a forest in full fall color, seen from above" width="650" height="433"/>
+  </figure>
+
+  <div class="text">
+    <span class="eyebrow">Our Approach</span>
+    <h2>The road together</h2>
+    <p class="lead">Every search is a journey, and the best ones aren't traveled alone.</p>
+    <p>
+      Before we talk about candidates, we take the time to understand where your organization is headed: the business
+      goals behind the role, the team it supports, and the culture that makes your company work. That groundwork shapes
+      every step that follows.
+    </p>
+    <p>
+      Along the way, we look past the résumé. Skills and experience matter, but so does emotional intelligence: how
+      someone communicates, adapts, leads, and fits the people around them. We work inside your process and represent
+      your brand with care, as an extension of your team rather than a third-party vendor, and we stay with you until the
+      road ends somewhere better than where it started.
+    </p>
+  </div>
+
+  <ol class="steps">
+    {steps.map((s, i) => (
+      <li>
+        <span class="num">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .road {
+    grid-template-areas:
+      'photo text'
+      'steps steps';
+  }
+  .photo { grid-area: photo; margin: 0; }
+  .text { grid-area: text; }
+  .steps { grid-area: steps; }
+
+  .photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.3);
+  }
+
+  .lead { color: var(--gold); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 16px 0 0;
+    padding: 32px 0 0;
+    list-style: none;
+    border-top: 1px solid rgb(255 245 217 / 0.2);
+  }
+  .steps li { display: flex; gap: 14px; }
+  .num {
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .steps h3 {
+    margin-bottom: 6px;
+    font-size: 19px;
+  }
+  .steps p {
+    font-size: 15px;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 899px) {
+    .road { grid-template-areas: 'text' 'photo' 'steps'; }
+    .steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>
