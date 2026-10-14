@@ -32,7 +32,7 @@ Every change is in Git history. To undo a published change, use `git revert` on 
 
 | What | File |
 |---|---|
-| Menus, Open Roles link, LinkedIn links, email (used by header and footer) | `src/data/site.ts` |
+| Menus, Open Roles link, LinkedIn links (used by header and footer). Devin's email is deliberately not shown on the site | `src/data/site.ts` |
 | Home page | `src/pages/index.astro` |
 | About page | `src/pages/about.astro` |
 | Services page | `src/pages/services.astro` |
@@ -40,7 +40,7 @@ Every change is in Git history. To undo a published change, use `git revert` on 
 | Header, dropdown menus and phone menu | `src/components/Header.astro` |
 | Footer (every page) | `src/components/Footer.astro` |
 | Industries cards (Home, Services) | `src/components/Industries.astro` |
-| Client names/logos (Home, About) | `src/components/Clients.astro` (logo files go in `public/images/clients/`) |
+| Client logos (Home, About) | `src/components/Clients.astro` (navy transparent PNGs in `public/images/clients/`; originals in OneDrive `02 Brand Assets/Logos`) |
 | "The Road Together" approach section (Home, About) | `src/components/RoadTogether.astro` |
 | Closing call-to-action band with the sunset video | `src/components/CtaBand.astro` |
 | Contact form fields | `src/components/ContactForm.astro` |

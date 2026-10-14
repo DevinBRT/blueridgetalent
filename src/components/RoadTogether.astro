@@ -1,8 +1,16 @@
 ---
 /**
- * "The Road Together": Devin's approach, told around the winding mountain road photo.
- * Used on the Home and About pages.
+ * "The Road Together": Devin's approach, told over a full-width photo of a
+ * winding mountain road. Used on the Home and About pages.
+ *
+ * The photo should be at least 2400px wide to stay sharp across large screens.
+ * Replace public/images/road.jpg (keep the name) to swap in a larger copy.
  */
+interface Props {
+  id?: string;
+}
+const { id } = Astro.props;
+
 const steps = [
   { title: 'Understand the business', text: 'Goals, growth plans and what the role really needs to accomplish.' },
   { title: 'Learn the culture', text: 'How your teams work, communicate and make decisions.' },
@@ -11,68 +19,73 @@ const steps = [
 ];
 ---
 
-<div class="road split">
-  <figure class="photo">
-    <img src="/images/road.jpg" alt="A winding road through a forest in full fall color, seen from above" width="650" height="433"/>
-  </figure>
-
-  <div class="text">
-    <span class="eyebrow">Our Approach</span>
-    <h2>The road together</h2>
-    <p class="lead">Every search is a journey, and the best ones aren't traveled alone.</p>
-    <p>
-      Before we talk about candidates, we take the time to understand where your organization is headed: the business
-      goals behind the role, the team it supports, and the culture that makes your company work. That groundwork shapes
-      every step that follows.
-    </p>
-    <p>
-      Along the way, we look past the résumé. Skills and experience matter, but so does emotional intelligence: how
-      someone communicates, adapts, leads, and fits the people around them. We work inside your process and represent
-      your brand with care, as an extension of your team rather than a third-party vendor, and we stay with you until the
-      road ends somewhere better than where it started.
-    </p>
+<section class="road bg-section" id={id}>
+  <div class="bg-media">
+    <img src="/images/road.jpg" alt="" width="650" height="433" />
+    <div class="overlay"></div>
   </div>
 
-  <ol class="steps">
-    {steps.map((s, i) => (
-      <li>
-        <span class="num">{String(i + 1).padStart(2, '0')}</span>
-        <div>
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
-        </div>
-      </li>
-    ))}
-  </ol>
-</div>
+  <div class="container">
+    <div class="text">
+      <span class="eyebrow">Our Approach</span>
+      <h2>The road together</h2>
+      <p class="lead">Every search is a journey, and the best ones aren't traveled alone.</p>
+      <p>
+        Before we talk about candidates, we take the time to understand where your organization is headed: the business
+        goals behind the role, the team it supports, and the culture that makes your company work. That groundwork shapes
+        every step that follows.
+      </p>
+      <p>
+        Along the way, we look past the résumé. Skills and experience matter, but so does emotional intelligence: how
+        someone communicates, adapts, leads, and fits the people around them. We work inside your process and represent
+        your brand with care, as an extension of your team rather than a third-party vendor, and we stay with you until the
+        road ends somewhere better than where it started.
+      </p>
+    </div>
+
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
 
 <style>
   .road {
-    grid-template-areas:
-      'photo text'
-      'steps steps';
+    padding: clamp(80px, 9vw, 140px) 0 clamp(48px, 5vw, 72px);
+    background: var(--navy);
+    color: var(--cream);
   }
-  .photo { grid-area: photo; margin: 0; }
-  .text { grid-area: text; }
-  .steps { grid-area: steps; }
-
-  .photo img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-    box-shadow: 0 24px 48px rgb(0 0 0 / 0.3);
+  .road .bg-media img { object-position: 50% 40%; }
+  /* Navy shade strongest behind the text, fading out so the road shows on the right */
+  .overlay {
+    background:
+      linear-gradient(90deg, rgb(15 23 48 / 0.94) 0%, rgb(15 23 48 / 0.82) 42%, rgb(15 23 48 / 0.25) 75%, rgb(15 23 48 / 0.1) 100%),
+      linear-gradient(to top, rgb(15 23 48 / 0.85) 0%, rgb(15 23 48 / 0) 35%);
   }
 
+  .text {
+    max-width: 620px;
+    margin-bottom: clamp(56px, 8vw, 120px);
+    text-shadow: 0 1px 12px rgb(15 23 48 / 0.5);
+  }
   .lead { color: var(--gold); }
 
   .steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    margin: 16px 0 0;
-    padding: 32px 0 0;
+    margin: 0;
+    padding: 28px 0 0;
     list-style: none;
-    border-top: 1px solid rgb(255 245 217 / 0.2);
+    border-top: 1px solid rgb(255 245 217 / 0.25);
   }
   .steps li { display: flex; gap: 14px; }
   .num {
@@ -88,11 +101,14 @@ const steps = [
   }
   .steps p {
     font-size: 15px;
-    opacity: 0.85;
+    opacity: 0.9;
   }
 
   @media (max-width: 899px) {
-    .road { grid-template-areas: 'text' 'photo' 'steps'; }
+    /* On phones the text covers most of the width, so shade the whole photo evenly */
+    .overlay {
+      background: linear-gradient(to bottom, rgb(15 23 48 / 0.7), rgb(15 23 48 / 0.88));
+    }
     .steps { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 520px) {

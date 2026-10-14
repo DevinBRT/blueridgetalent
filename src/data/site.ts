@@ -1,11 +1,11 @@
 // One place for the site's menus and links. The header and footer both read from here,
 // so adding or renaming a page section only needs a change in this file.
+// Devin's email is intentionally not on the site: visitors use the contact form.
 
 export const links = {
   openRoles: 'https://www.linkedin.com/company/blue-ridge-talent/jobs/',
   companyLinkedIn: 'https://www.linkedin.com/company/blue-ridge-talent/',
   devinLinkedIn: 'https://www.linkedin.com/in/devin-moretz-7a746424/',
-  email: 'devin@blueridgetalent.us',
 };
 
 export interface NavItem {
