@@ -1,0 +1,108 @@
+@import '@fontsource/anton/400.css';
+@import '@fontsource/epilogue/400.css';
+@import '@fontsource/epilogue/700.css';
+
+/* ---------- Brand ---------- */
+:root {
+  --navy: #182241;
+  --cream: #fff5d9;
+  --slate: #7b949c;
+  --input-bg: #fafafa;
+
+  --font-heading: 'Anton', 'Impact', sans-serif;
+  --font-body: 'Epilogue', system-ui, sans-serif;
+
+  /* Sizes scale from phone to desktop, matching the Squarespace site */
+  --size-h1: clamp(2.9rem, 1.9rem + 2.7vw, 4.15rem);   /* 46px -> 66px */
+  --size-h2: clamp(2.14rem, 1.6rem + 1.5vw, 2.89rem);  /* 34px -> 46px */
+  --size-h3: clamp(1.76rem, 1.45rem + 0.9vw, 2.26rem); /* 28px -> 36px */
+  --size-body: clamp(1.25rem, 1.2rem + 0.2vw, 1.42rem); /* 20px -> 22.7px */
+
+  --gutter: clamp(23px, 2vw, 29px);
+  --header-height: 179px;
+}
+
+@media (max-width: 767px) {
+  :root { --header-height: 84px; }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0 0 0.4em;
+}
+h1 { font-size: var(--size-h1); line-height: 1.056; }
+h2 { font-size: var(--size-h2); line-height: 1.11; }
+h3 { font-size: var(--size-h3); line-height: 1.14; }
+
+p { margin: 0 0 0.75em; }
+
+a { color: inherit; }
+
+img, video { display: block; max-width: 100%; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem; top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--navy);
+  color: var(--cream);
+}
+.skip-link:focus { top: 1rem; }
+
+/* ---------- Full-bleed background sections ---------- */
+.bg-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.bg-section > .bg-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.bg-media img,
+.bg-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.bg-media .overlay {
+  position: absolute;
+  inset: 0;
+}
+
+/* Long-form copy blocks */
+.prose {
+  font-size: var(--size-body);
+  line-height: 1.5;
+}
+.prose p { margin-bottom: 0.65em; }
+.prose strong { font-weight: 700; }

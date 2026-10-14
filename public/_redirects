@@ -1,0 +1,4 @@
+# Old Squarespace addresses -> new pages (301 = permanent, keeps Google rankings)
+/home        /          301
+/cart        /          301
+/services3   /services  301

@@ -1,0 +1,53 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+interface Props {
+  /** Page name shown in the browser tab, e.g. "About". Leave empty on the home page. */
+  title?: string;
+  /** One or two sentences shown under the link in Google results and link previews. */
+  description: string;
+  /** Header text color: "light" (cream) for dark backgrounds, "dark" (navy) for light ones. */
+  headerTone?: 'light' | 'dark';
+  /** Hide this page from search engines (thank-you and 404 pages). */
+  noindex?: boolean;
+}
+
+const { title, description, headerTone = 'light', noindex = false } = Astro.props;
+const siteName = 'Blue Ridge Talent';
+const fullTitle = title ? `${title} — ${siteName}` : siteName;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+const canonical = new URL(path, Astro.site).href;
+const shareImage = new URL('/images/share.jpg', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Link previews (LinkedIn, Facebook, text messages) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header tone={headerTone} />
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>

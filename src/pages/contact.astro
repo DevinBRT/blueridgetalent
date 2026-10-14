@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundVideo from '../components/BackgroundVideo.astro';
+import ContactForm from '../components/ContactForm.astro';
+import LinkedInButton from '../components/LinkedInButton.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Blue Ridge Talent about talent advisory, embedded recruiting, or professional search."
+>
+  <section class="contact bg-section">
+    <div class="bg-media">
+      <BackgroundVideo name="mountains" />
+    </div>
+
+    <div class="layout">
+      <div class="intro">
+        <h1 class="heading">Let’s Connect</h1>
+        <div class="social"><LinkedInButton /></div>
+      </div>
+      <div class="form-column">
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    min-height: 969px;
+    background: var(--navy);
+    color: var(--cream);
+  }
+  .layout {
+    display: grid;
+    /* Form starts at the same spot as on the old site (725px on a 1440px screen) */
+    grid-template-columns: minmax(0, 49.6%) 1fr;
+    padding: 272px 29px 80px 50px;
+  }
+  .heading {
+    font-size: var(--size-h2);
+    line-height: 1.11;
+    margin-bottom: 30px;
+  }
+  .social {
+    padding-left: 94px;
+  }
+
+  @media (max-width: 767px) {
+    .contact { min-height: 954px; }
+    .layout {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 139px var(--gutter) 80px;
+    }
+    .heading { padding-left: 17px; margin-bottom: 170px; }
+    .social { padding-left: 0; text-align: center; margin-bottom: 30px; }
+  }
+</style>

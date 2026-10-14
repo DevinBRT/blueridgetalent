@@ -1,0 +1,160 @@
+---
+/**
+ * Contact form, handled by Netlify Forms (no server code needed).
+ * Netlify finds this form when the site is built, because of `data-netlify="true"`.
+ * Where submissions are emailed is set in Netlify:
+ *   Site configuration → Forms → Form notifications.
+ * The hidden "bot-field" is a honeypot that catches spam bots.
+ */
+---
+
+<form
+  class="contact-form"
+  name="contact"
+  method="POST"
+  action="/thank-you"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="visually-hidden" aria-hidden="true">
+    <label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+  </p>
+
+  <fieldset class="name-row">
+    <legend>Name</legend>
+    <div class="field">
+      <label for="first-name">First Name <span class="req">(required)</span></label>
+      <input id="first-name" name="firstName" type="text" autocomplete="given-name" required />
+    </div>
+    <div class="field">
+      <label for="last-name">Last Name <span class="req">(required)</span></label>
+      <input id="last-name" name="lastName" type="text" autocomplete="family-name" required />
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <label for="email">Email <span class="req">(required)</span></label>
+    <input id="email" name="email" type="email" autocomplete="email" required />
+  </div>
+
+  <div class="field">
+    <label for="message">Message <span class="req">(required)</span></label>
+    <textarea id="message" name="message" rows="4" required></textarea>
+  </div>
+
+  <button type="submit">Send</button>
+  <p class="form-error" role="alert" hidden>Sorry, something went wrong. Please try again, or reach out on LinkedIn.</p>
+</form>
+
+<p class="form-success" role="status" hidden>Thank you!</p>
+
+<script>
+  // Send without leaving the page, then show the thank-you message in place of
+  // the form (like Squarespace did). Without JavaScript, the form still posts
+  // normally and lands on /thank-you.
+  const form = document.querySelector<HTMLFormElement>('form.contact-form')!;
+  const success = document.querySelector<HTMLElement>('.form-success')!;
+  const error = form.querySelector<HTMLElement>('.form-error')!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = form.querySelector('button')!;
+    button.disabled = true;
+    error.hidden = true;
+    try {
+      const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      form.hidden = true;
+      success.hidden = false;
+      success.focus();
+    } catch {
+      error.hidden = false;
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  .contact-form {
+    font-size: 16px;
+  }
+  fieldset {
+    border: 0;
+    margin: 0 0 20px;
+    padding: 0;
+  }
+  legend {
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .name-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+  }
+  .name-row legend {
+    grid-column: 1 / -1;
+  }
+  .field {
+    margin-bottom: 20px;
+  }
+  .name-row .field { margin-bottom: 0; }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .req { opacity: 0.7; margin-left: 4px; }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 0;
+    background: var(--input-bg);
+    color: #000;
+    font: inherit;
+  }
+  input { height: 46px; }
+  textarea { height: 100px; min-height: 60px; resize: vertical; }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--cream);
+    outline-offset: 2px;
+  }
+
+  button {
+    padding: 12.8px 21.4px;
+    border: 0;
+    border-radius: 300px;
+    background: var(--cream);
+    color: var(--navy);
+    font: inherit;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  button:hover { opacity: 0.85; }
+  button:disabled { opacity: 0.6; cursor: wait; }
+
+  .form-error { margin-top: 16px; }
+  .form-success {
+    font-size: var(--size-body);
+    outline: none;
+  }
+
+  .name-row label { white-space: nowrap; }
+
+  @media (max-width: 767px) {
+    .req { margin-left: 2px; }
+  }
+</style>

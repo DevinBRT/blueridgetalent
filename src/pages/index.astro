@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundVideo from '../components/BackgroundVideo.astro';
+---
+
+<BaseLayout
+  description="Blue Ridge Talent is a Charlotte-based recruiting and talent advisory firm offering talent advisory, embedded recruiting, and professional search across the Carolinas and beyond."
+>
+  <section class="hero bg-section">
+    <div class="bg-media">
+      <BackgroundVideo name="mountains" opacity={0.7} />
+    </div>
+    <div class="hero-text">
+      <h1>Blue Ridge Talent</h1>
+      <p class="tagline"><em>Elevating the Talent Experience</em></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 1254px;
+    background: var(--navy);
+    color: var(--cream);
+    text-align: center;
+  }
+  .hero-text {
+    padding: 270px var(--gutter) 0;
+  }
+  .hero h1 {
+    margin-bottom: 0.45em;
+  }
+  .tagline {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: var(--size-h3);
+    line-height: 1.14;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 767px) {
+    .hero { min-height: 985px; }
+    .hero-text { padding-top: 139px; }
+    .hero h1 { margin-bottom: 0.65em; }
+  }
+</style>

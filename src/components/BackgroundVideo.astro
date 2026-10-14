@@ -1,0 +1,39 @@
+---
+/**
+ * Looping, muted background video that fills its parent .bg-section.
+ * Phones get a lighter 720p file. Visitors who ask their device for
+ * reduced motion see the still poster frame instead.
+ *
+ * Usage: <BackgroundVideo name="mountains" />
+ * expects public/videos/<name>.mp4, <name>-720.mp4 and <name>-poster.jpg
+ */
+interface Props {
+  name: string;
+  opacity?: number;
+}
+const { name, opacity = 1 } = Astro.props;
+---
+
+<video
+  class="bg-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  poster={`/videos/${name}-poster.jpg`}
+  aria-hidden="true"
+  style={opacity < 1 ? `opacity: ${opacity}` : undefined}
+>
+  <source src={`/videos/${name}-720.mp4`} type="video/mp4" media="(max-width: 767px)" />
+  <source src={`/videos/${name}.mp4`} type="video/mp4" />
+</video>
+
+<script>
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('video.bg-video').forEach((v) => {
+      v.removeAttribute('autoplay');
+      v.pause();
+    });
+  }
+</script>

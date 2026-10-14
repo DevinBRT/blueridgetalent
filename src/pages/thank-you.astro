@@ -1,0 +1,31 @@
+---
+// Shown after the contact form is sent, only for visitors without JavaScript.
+// Everyone else sees "Thank you!" in place of the form on /contact.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundVideo from '../components/BackgroundVideo.astro';
+---
+
+<BaseLayout title="Thank You" description="Thanks for reaching out to Blue Ridge Talent." noindex>
+  <section class="message bg-section">
+    <div class="bg-media">
+      <BackgroundVideo name="mountains" opacity={0.7} />
+    </div>
+    <div class="text">
+      <h1>Thank you!</h1>
+      <p><a href="/">Back to home</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .message {
+    min-height: 100svh;
+    background: var(--navy);
+    color: var(--cream);
+    text-align: center;
+  }
+  .text {
+    padding: calc(var(--header-height) + 90px) var(--gutter) 80px;
+    font-size: var(--size-body);
+  }
+</style>
