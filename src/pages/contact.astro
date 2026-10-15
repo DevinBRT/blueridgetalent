@@ -47,7 +47,7 @@ import { links } from '../data/site';
 
   .layout {
     display: grid;
-    grid-template-columns: 1fr 1.1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
     gap: clamp(40px, 6vw, 96px);
     align-items: start;
   }
@@ -93,6 +93,6 @@ import { links } from '../data/site';
   }
 
   @media (max-width: 899px) {
-    .layout { grid-template-columns: 1fr; }
+    .layout { grid-template-columns: minmax(0, 1fr); }
   }
 </style>
