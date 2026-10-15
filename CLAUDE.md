@@ -32,28 +32,37 @@ Every change is in Git history. To undo a published change, use `git revert` on 
 
 | What | File |
 |---|---|
+| Menus, Open Roles link, LinkedIn links (used by header and footer). Devin's email is deliberately not shown on the site | `src/data/site.ts` |
 | Home page | `src/pages/index.astro` |
 | About page | `src/pages/about.astro` |
 | Services page | `src/pages/services.astro` |
 | Contact page | `src/pages/contact.astro` |
+| Header, dropdown menus and phone menu | `src/components/Header.astro` |
+| Footer (every page) | `src/components/Footer.astro` |
+| Industries cards (Home, Services) | `src/components/Industries.astro` |
+| Client logos (Home, About) | `src/components/Clients.astro` (navy transparent PNGs in `public/images/clients/`; originals in OneDrive `02 Brand Assets/Logos`) |
+| "The Road Together" approach section (Home, About) | `src/components/RoadTogether.astro` |
+| Closing call-to-action band with the sunset video | `src/components/CtaBand.astro` |
 | Contact form fields | `src/components/ContactForm.astro` |
-| LinkedIn link | `src/components/LinkedInButton.astro` |
-| Header and phone menu (shared by every page) | `src/components/Header.astro` |
 | Page wrapper: tab title, Google description, link previews | `src/layouts/BaseLayout.astro` |
-| Colors, fonts, text sizes | `src/styles/global.css` |
+| Colors, fonts, buttons, cards, section styles | `src/styles/global.css` |
 | Background videos | `public/videos/` (each has a full-size `.mp4`, a `-720.mp4` for phones and a `-poster.jpg` still frame) |
-| Background images, link-preview image | `public/images/` (`share.jpg` is the image shown when the site is shared on LinkedIn or by text) |
+| Images | `public/images/` (`share.jpg` is the image shown when the site is shared on LinkedIn or by text) |
 | Redirects from old addresses | `public/_redirects` |
 | Thank-you page (only for visitors with JavaScript off) | `src/pages/thank-you.astro` |
 | Page-not-found page | `src/pages/404.astro` |
 
-To add a page: create `src/pages/<name>.astro` using `BaseLayout` (copy an existing page), and add it to the `nav` list in `Header.astro` if it belongs in the menu. Every page needs a `description`, which is what Google shows under the link.
+Pages are built from full-width sections (`.section` plus `--cream`, `--light` or `--navy`) holding a `.container`. Content inside uses the shared building blocks in `global.css`: `.card` / `.card-grid`, `.split` (two columns), `.checklist`, `.button`, `.eyebrow`. Reuse these rather than inventing new styles, so the site stays consistent.
+
+To add a dropdown item, add it to `nav` in `src/data/site.ts` and give the target section a matching `id`.
+
+To add a page: create `src/pages/<name>.astro` using `BaseLayout` (copy an existing page), and add it to `nav` in `src/data/site.ts` if it belongs in the menu. Every page needs a `description`, which is what Google shows under the link.
 
 ## Brand rules
 
-- **Colors:** navy `#182241` (`--navy`), cream `#FFF5D9` (`--cream`), slate blue-gray `#7B949C` (`--slate`). Use the CSS variables; don't introduce new colors without asking Devin.
+- **Colors:** navy `#182241` (`--navy`), cream `#FFF5D9` (`--cream`), slate blue-gray `#7B949C` (`--slate`), and sunset gold `#E3A646` (`--gold`) for accents only (lines, numbers, and text on navy; never text on cream). Use the CSS variables; don't introduce new colors without asking Devin.
 - **Fonts:** **Anton** for headings (always uppercase), **Epilogue** for everything else. Both are bundled locally through `@fontsource`.
-- **Look:** full-screen Blue Ridge mountain and sunset photography or video behind the text. Cream text on dark backgrounds, navy text on light ones. The header text color is set per page with `headerTone`.
+- **Look:** full-screen Blue Ridge mountain and sunset photography or video behind the text. Cream text on dark backgrounds, navy text on light ones. Content is broken into sections and cards, not long walls of text.
 - **Voice:** confident, plain-spoken, people-first. Short sentences. Avoid staffing-agency clichés.
 - **Addresses:** keep `/about`, `/services` and `/contact` as they are. They're indexed by Google. If a page is ever renamed, add a 301 redirect in `public/_redirects`.
 

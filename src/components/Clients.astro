@@ -1,0 +1,74 @@
+---
+/**
+ * Companies Devin has partnered with.
+ * Logos live in public/images/clients/ as navy, transparent PNGs, so they all match.
+ * `height` evens out their visual size: wide wordmarks need less height than
+ * stacked or square logos. A client without a `logo` shows its name as text.
+ */
+const clients: { name: string; logo?: string; height?: number }[] = [
+  { name: 'SCOR', logo: '/images/clients/scor.png', height: 30 },
+  { name: 'Wells Fargo', logo: '/images/clients/wells-fargo.png', height: 56 },
+  { name: 'Husqvarna', logo: '/images/clients/husqvarna.png', height: 64 },
+  { name: 'Aeroflow' },
+  { name: 'Eurowise', logo: '/images/clients/eurowise.png', height: 28 },
+  { name: 'Optimum Manufacturing', logo: '/images/clients/optimum.png', height: 36 },
+];
+---
+
+<div class="clients">
+  <div class="section-head section-head--center">
+    <span class="eyebrow">Clients</span>
+    <h2>Trusted by teams like these</h2>
+    <p>From global insurers to growing manufacturers, organizations rely on Blue Ridge Talent to find the people who move them forward.</p>
+  </div>
+  <ul class="logo-wall">
+    {clients.map((c) => (
+      <li>
+        {c.logo ? (
+          <img src={c.logo} alt={c.name} loading="lazy" style={`height: ${c.height ?? 40}px`} />
+        ) : (
+          <span>{c.name}</span>
+        )}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .logo-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .logo-wall li {
+    display: grid;
+    place-items: center;
+    min-height: 130px;
+    padding: 24px;
+    background: var(--cream-light);
+    text-align: center;
+  }
+  .logo-wall img {
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .logo-wall li:hover img { opacity: 1; }
+  .logo-wall span {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy);
+    opacity: 0.85;
+  }
+</style>

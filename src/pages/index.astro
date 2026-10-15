@@ -1,46 +1,158 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BackgroundVideo from '../components/BackgroundVideo.astro';
+import ExternalIcon from '../components/ExternalIcon.astro';
+import RoadTogether from '../components/RoadTogether.astro';
+import Industries from '../components/Industries.astro';
+import Clients from '../components/Clients.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { links } from '../data/site';
+
+const services = [
+  {
+    href: '/services#talent-advisory',
+    title: 'Talent Advisory',
+    text: 'Figure out why hiring has become harder, slower or more expensive, and build a better recruiting operation.',
+  },
+  {
+    href: '/services#embedded-recruiting',
+    title: 'Embedded Recruiting',
+    text: 'Experienced recruiting capacity inside your team, for as long as you need it.',
+  },
+  {
+    href: '/services#professional-search',
+    title: 'Professional Search',
+    text: 'A trusted partner for the important hires, from first conversation through offer.',
+  },
+  {
+    href: '/services#in-house',
+    title: 'In-House Talent Acquisition',
+    text: 'Build a recruiting function that belongs to your organization, from the ground up.',
+  },
+];
 ---
 
 <BaseLayout
   description="Blue Ridge Talent is a Charlotte-based recruiting and talent advisory firm offering talent advisory, embedded recruiting, and professional search across the Carolinas and beyond."
 >
+  <!-- Hero -->
   <section class="hero bg-section">
     <div class="bg-media">
       <BackgroundVideo name="mountains" opacity={0.7} />
+      <div class="overlay"></div>
     </div>
-    <div class="hero-text">
+    <div class="container hero-inner">
+      <span class="eyebrow">Recruiting &amp; Talent Advisory · Charlotte, NC</span>
       <h1>Blue Ridge Talent</h1>
       <p class="tagline"><em>Elevating the Talent Experience</em></p>
+      <p class="lead">
+        Recruiting support built around your business, whether you need a critical hire, more capacity, or a better way to
+        recruit altogether.
+      </p>
+      <div class="button-row">
+        <a class="button button--cream" href="/services">Explore services</a>
+        <a class="button button--outline" href={links.openRoles} target="_blank" rel="noopener">View open roles <ExternalIcon /></a>
+      </div>
     </div>
   </section>
+
+  <!-- Intro -->
+  <section class="section section--cream">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Who we are</span>
+        <h2>Recruiting support, built around your business</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">
+          We don’t believe every hiring problem needs the same solution.
+        </p>
+        <p>
+          Sometimes you need help with a critical search. Sometimes your internal recruiting team needs additional
+          capacity. And sometimes the real answer is improving the way your organization recruits altogether. We take the
+          time to understand how you hire today, then build the right solution around you — not the other way around.
+        </p>
+        <a class="card-link" href="/about">More about us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How we help</span>
+        <h2>Advise, embed, or lead the search</h2>
+        <p>We can advise your team, work alongside it, or take ownership of a search directly.</p>
+      </div>
+      <div class="card-grid">
+        {services.map((s, i) => (
+          <a class="card" href={s.href}>
+            <span class="card-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+            <span class="card-link">Learn more</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <RoadTogether />
+
+  <!-- Industries -->
+  <section class="section section--cream">
+    <div class="container">
+      <Industries />
+    </div>
+  </section>
+
+  <!-- Clients -->
+  <section class="section section--light">
+    <div class="container">
+      <Clients />
+    </div>
+  </section>
+
+  <CtaBand />
 </BaseLayout>
 
 <style>
   .hero {
-    min-height: 1254px;
+    display: flex;
+    align-items: center;
+    min-height: max(100svh, 640px);
+    padding: calc(var(--header-height) + 40px) 0 80px;
     background: var(--navy);
     color: var(--cream);
     text-align: center;
   }
-  .hero-text {
-    padding: 270px var(--gutter) 0;
+  .hero .overlay {
+    background: linear-gradient(to bottom, rgb(15 23 48 / 0) 50%, rgb(15 23 48 / 0.55) 100%);
   }
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero .eyebrow::before { display: none; }
   .hero h1 {
-    margin-bottom: 0.45em;
+    font-size: clamp(3.2rem, 2rem + 5vw, 6.5rem);
+    margin-bottom: 0.15em;
   }
   .tagline {
-    margin: 0;
+    margin-bottom: 28px;
     font-family: var(--font-heading);
-    font-size: var(--size-h3);
-    line-height: 1.14;
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.3rem);
+    line-height: 1.15;
     text-transform: uppercase;
   }
-
-  @media (max-width: 767px) {
-    .hero { min-height: 985px; }
-    .hero-text { padding-top: 139px; }
-    .hero h1 { margin-bottom: 0.65em; }
+  .hero .lead {
+    max-width: 640px;
+    margin-bottom: 36px;
   }
+  .hero .button-row { justify-content: center; }
+
+  .card-link { display: inline-block; margin-top: 8px; }
 </style>
