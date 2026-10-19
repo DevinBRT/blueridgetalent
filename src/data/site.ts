@@ -34,7 +34,6 @@ export const nav: NavItem[] = [
       { label: 'Our Story', href: '/about' },
       { label: 'What We Believe', href: '/about#beliefs' },
       { label: 'Our Approach', href: '/about#approach' },
-      { label: 'Clients', href: '/about#clients' },
     ],
   },
   { label: 'Contact', href: '/contact' },
