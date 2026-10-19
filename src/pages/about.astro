@@ -1,59 +1,131 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RoadTogether from '../components/RoadTogether.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const beliefs = [
+  {
+    title: 'Recruiting fanatics',
+    text: 'We genuinely love what we do because we believe exceptional talent changes companies. Our mission is to help organizations identify, hire, and retain the people who will shape their future.',
+  },
+  {
+    title: 'Lasting value',
+    text: 'Whether we’re advising, embedding alongside your team, or leading a critical search, success isn’t measured by accepted offers. It’s measured by stronger teams and healthier hiring practices.',
+  },
+  {
+    title: 'Intentionally transient',
+    text: 'We identify the root causes of hiring challenges, build sustainable solutions, and empower you to own them long after we’re gone. Did we leave your organization stronger than we found it?',
+  },
+  {
+    title: 'People-first cultures',
+    text: 'The strongest companies are built by people who are empowered to do their best work. Every engagement is guided by integrity, transparency, curiosity, and a commitment to lasting value.',
+  },
+  {
+    title: 'People, process & technology',
+    text: 'We’re always exploring how technology, including AI, can improve the hiring experience without replacing the human relationships that make great companies possible.',
+  },
+];
 ---
 
 <BaseLayout
   title="About"
   description="Founded by Devin Moretz in 2023, Blue Ridge Talent helps organizations identify, hire, and retain great people while building recruiting strategies that are sustainable, scalable, and centered around people."
-  headerTone="dark"
 >
-  <section class="about bg-section">
+  <section class="page-hero bg-section">
     <div class="bg-media">
       <img src="/images/about-mountains.jpg" alt="" width="2500" height="1667" />
       <div class="overlay"></div>
     </div>
-
-    <div class="content prose">
+    <div class="container">
+      <span class="eyebrow">About</span>
       <h1>About Blue Ridge Talent</h1>
-
-      <p>Blue Ridge Talent was founded by Devin Moretz in 2023 with a simple belief: <strong>there is a better way to support organizations than simply delivering a résumé followed by an invoice.</strong></p>
-
-      <p>After experiencing the recruiting industry from every angle—including headhunting, temporary staffing, executive search, RPO, embedded recruiting, in-house talent acquisition, and consulting—we observed gaps in the traditional recruiting model. <strong>Too often, recruiting is treated as a transactional service rather than a strategic function capable of transforming an organization.</strong> We knew there had to be a better, more sustainable way.</p>
-
-      <p><strong>At our core, we're recruiting fanatics.</strong> We genuinely love what we do because we believe exceptional talent changes companies. Our mission is to help organizations identify, hire, and retain the people who will shape their future while building recruiting strategies that are sustainable, scalable, and centered around people.</p>
-
-      <p>Whether we're serving as a trusted advisor, embedding alongside an internal talent acquisition team, or leading a critical executive search, <strong>our objective remains the same: to create lasting value for every organization we partner with.</strong> Success isn't measured simply by accepted offers—it's measured by stronger teams, healthier hiring practices, and organizations that are better equipped for whatever comes next.</p>
-
-      <p><strong>Our model is intentionally transient.</strong> We believe our role is to identify the root causes of hiring and talent challenges, build sustainable solutions, and empower our clients to own those solutions long after our engagement has ended. Sometimes that means teaching your team how to solve the problem. Other times it means rolling up our sleeves and solving it alongside you. Either way, our success is measured by one simple question: <strong>Did we leave your organization stronger than we found it?</strong></p>
-
-      <p><strong>We believe the strongest companies are built by people who are empowered to do their best work.</strong> That's why we partner with organizations committed to building human-centric cultures where exceptional talent can thrive. Every engagement is guided by integrity, transparency, curiosity, and an unwavering commitment to creating lasting value.</p>
-
-      <p>Like our clients, we're a business built of people. We're equally passionate about embracing the future of work, continuously exploring how technology—including artificial intelligence—can enhance the hiring experience without replacing the human relationships that make great companies possible. <strong>We believe the future belongs to organizations that thoughtfully blend people, process, and technology</strong>—and we're committed to helping our clients build organizations that are stronger, more resilient, and better prepared for whatever comes next.</p>
+      <p class="lead">Founded in 2023 by Devin Moretz, built on a better way to recruit.</p>
     </div>
   </section>
+
+  <!-- Story -->
+  <section class="section section--cream" id="story">
+    <div class="container split split--top">
+      <div class="prose">
+        <span class="eyebrow">Our story</span>
+        <h2>There had to be a better way</h2>
+        <p class="lead">
+          Blue Ridge Talent was founded by Devin Moretz in 2023 with a simple belief: there is a better way to support
+          organizations than simply delivering a résumé followed by an invoice.
+        </p>
+        <p>
+          After experiencing the recruiting industry from every angle — including temporary staffing,
+          executive search, RPO, embedded recruiting, in-house talent acquisition, and consulting — we observed gaps in the
+          traditional recruiting model. Too often, recruiting is treated as a transactional service rather than a strategic
+          function capable of transforming an organization.
+        </p>
+        <p>We knew there had to be a better, more sustainable way.</p>
+      </div>
+      <figure class="quote">
+        <blockquote>
+          “Did we leave your organization stronger than we found it?”
+        </blockquote>
+        <figcaption>The one question we measure ourselves by</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Beliefs -->
+  <section class="section section--light" id="beliefs">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we believe</span>
+        <h2>The principles behind every engagement</h2>
+      </div>
+      <div class="card-grid beliefs">
+        {beliefs.map((b, i) => (
+          <article class="card">
+            <span class="card-number">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{b.title}</h3>
+            <p>{b.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Approach -->
+  <RoadTogether id="approach" />
+
+  <CtaBand heading="Let’s talk about your team" />
 </BaseLayout>
 
 <style>
-  .about {
-    min-height: 1905px;
-    background: var(--slate);
-  }
-  .about .overlay {
-    background: var(--slate);
-    opacity: 0.15;
-  }
-  .content {
-    max-width: 1382px;
-    padding: 270px var(--gutter) 120px;
-  }
-  .content h1 {
-    text-align: center;
-    margin-bottom: 0.5em;
+  /* Five cards: three across, then two wider ones, so none sits alone */
+  @media (min-width: 900px) {
+    .beliefs { grid-template-columns: repeat(6, 1fr); }
+    .beliefs > :nth-child(-n + 3) { grid-column: span 2; }
+    .beliefs > :nth-child(n + 4) { grid-column: span 3; }
   }
 
-  @media (max-width: 767px) {
-    .about { min-height: 0; }
-    /* The old site's phone layout kept a wider right margin on this page */
-    .content { padding: 174px 68px 80px var(--gutter); }
+  .page-hero .overlay {
+    background: linear-gradient(to bottom, rgb(15 23 48 / 0.5) 0%, rgb(15 23 48 / 0.2) 40%, rgb(15 23 48 / 0.7) 100%);
+  }
+
+  .quote {
+    margin: 0;
+    padding: clamp(32px, 4vw, 56px);
+    background: var(--navy);
+    color: var(--cream);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--gold);
+  }
+  .quote blockquote {
+    margin: 0 0 20px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 1.3rem + 1.4vw, 2.6rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+  .quote figcaption {
+    font-size: 15px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.04em;
   }
 </style>

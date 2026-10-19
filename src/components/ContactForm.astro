@@ -157,4 +157,9 @@
   @media (max-width: 767px) {
     .req { margin-left: 2px; }
   }
+  /* Phones: First and Last name stack so the labels never push the form off-screen */
+  @media (max-width: 520px) {
+    .name-row { grid-template-columns: 1fr; row-gap: 16px; }
+    .name-row label { white-space: normal; }
+  }
 </style>

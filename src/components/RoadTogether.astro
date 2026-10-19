@@ -1,0 +1,119 @@
+---
+/**
+ * "The Road Together": Devin's approach, beside a photo of a winding mountain road.
+ * Used on the Home and About pages.
+ *
+ * The photo is only 650px wide, so it is never shown wider than that; any larger
+ * would blur it. With a 2400px+ copy, it could go full width again.
+ */
+interface Props {
+  id?: string;
+}
+const { id } = Astro.props;
+
+const steps = [
+  { title: 'Understand the business', text: 'Goals, growth plans and what the role really needs to accomplish.' },
+  { title: 'Learn the culture', text: 'How your teams work, communicate and make decisions.' },
+  { title: 'Evaluate the whole person', text: 'Skills and experience, plus the emotional intelligence that makes people thrive.' },
+  { title: 'Travel as one team', text: 'An extension of your company, not a third-party vendor.' },
+];
+---
+
+<section class="road" id={id}>
+  <div class="container">
+    <div class="intro">
+      <div class="text">
+        <span class="eyebrow">Our Approach</span>
+        <h2>The road together</h2>
+        <p class="lead">Every search is a journey, and the best ones aren't traveled alone.</p>
+        <p>
+          Before we talk about candidates, we take the time to understand where your organization is headed: the business
+          goals behind the role, the team it supports, and the culture that makes your company work. That groundwork shapes
+          every step that follows.
+        </p>
+        <p>
+          Along the way, we look past the résumé. Skills and experience matter, but so does emotional intelligence: how
+          someone communicates, adapts, leads, and fits the people around them. We work inside your process and represent
+          your brand with care, as an extension of your team rather than a third-party vendor, and we stay with you until the
+          road ends somewhere better than where it started.
+        </p>
+      </div>
+      <figure class="photo">
+        <img src="/images/road.jpg" alt="A winding road through a forest in full fall color, seen from above" width="650" height="433" />
+      </figure>
+    </div>
+
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .road {
+    padding: var(--section-space) 0 clamp(48px, 5vw, 72px);
+    background: var(--navy);
+    color: var(--cream);
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 600px);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+    margin-bottom: clamp(48px, 6vw, 88px);
+  }
+  .lead { color: var(--gold); }
+
+  .photo { margin: 0; }
+  .photo img {
+    /* Never wider than the file itself, so it stays sharp */
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.35);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 0;
+    padding: 28px 0 0;
+    list-style: none;
+    border-top: 1px solid rgb(255 245 217 / 0.25);
+  }
+  .steps li { display: flex; gap: 14px; }
+  .num {
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .steps h3 {
+    margin-bottom: 6px;
+    font-size: 19px;
+  }
+  .steps p {
+    font-size: 15px;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 899px) {
+    .intro { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>
