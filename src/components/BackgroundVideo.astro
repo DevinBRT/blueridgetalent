@@ -6,23 +6,31 @@
  *
  * Usage: <BackgroundVideo name="mountains" />
  * expects public/videos/<name>.mp4, <name>-720.mp4 and <name>-poster.jpg
+ *
+ * `fadeLoop` plays the clip through, fades it out to the section's background
+ * color, then restarts it from the top, instead of looping with a jump cut.
+ * `speed` sets the playback rate (0.7 = 30% slower).
  */
 interface Props {
   name: string;
   opacity?: number;
+  fadeLoop?: boolean;
+  speed?: number;
 }
-const { name, opacity = 1 } = Astro.props;
+const { name, opacity = 1, fadeLoop = false, speed = 1 } = Astro.props;
 ---
 
 <video
   class="bg-video"
   autoplay
   muted
-  loop
+  loop={!fadeLoop}
   playsinline
   preload="auto"
   poster={`/videos/${name}-poster.jpg`}
   aria-hidden="true"
+  data-fade-loop={fadeLoop ? '' : undefined}
+  data-speed={speed !== 1 ? speed : undefined}
   style={opacity < 1 ? `opacity: ${opacity}` : undefined}
 >
   <source src={`/videos/${name}-720.mp4`} type="video/mp4" media="(max-width: 767px)" />
@@ -30,10 +38,68 @@ const { name, opacity = 1 } = Astro.props;
 </video>
 
 <script>
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll<HTMLVideoElement>('video.bg-video').forEach((v) => {
+  // Keep in step with the transition time in the <style> below.
+  const FADE_MS = 1600;
+  const HOLD_MS = 300;
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLVideoElement>('video.bg-video').forEach((v) => {
+    if (reducedMotion) {
       v.removeAttribute('autoplay');
       v.pause();
+      return;
+    }
+
+    const speed = Number(v.dataset.speed ?? 1);
+    const applySpeed = () => {
+      v.defaultPlaybackRate = speed;
+      v.playbackRate = speed;
+    };
+    applySpeed();
+    // Some browsers reset the rate when the source loads.
+    v.addEventListener('loadedmetadata', applySpeed);
+
+    if (!('fadeLoop' in v.dataset)) return;
+
+    // Start fading this many seconds of video before the end, so the fade
+    // finishes as the last frame plays.
+    const fadeLead = (FADE_MS / 1000) * speed;
+    let fading = false;
+
+    const restart = () => {
+      v.currentTime = 0;
+      v.play().catch(() => {});
+      setTimeout(() => {
+        v.classList.remove('is-faded');
+        fading = false;
+      }, HOLD_MS);
+    };
+
+    v.addEventListener('timeupdate', () => {
+      if (fading || !v.duration) return;
+      if (v.currentTime >= v.duration - fadeLead) {
+        fading = true;
+        v.classList.add('is-faded');
+        setTimeout(restart, FADE_MS);
+      }
     });
-  }
+    // Safety net if the clip ends before the fade has started.
+    v.addEventListener('ended', () => {
+      if (!fading) restart();
+    });
+  });
 </script>
+
+<style>
+  video[data-fade-loop] {
+    transition:
+      opacity 1.6s ease-in-out,
+      filter 1.6s ease-in-out;
+  }
+  /* Fades to whatever is behind the video (navy on the home hero) */
+  video[data-fade-loop].is-faded {
+    opacity: 0 !important;
+    filter: saturate(0);
+  }
+</style>
